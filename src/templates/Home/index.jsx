@@ -11,7 +11,7 @@ export const Home = () => {
   const [posts, setPosts] = useState([]);
   const [allPosts, setAllPosts] = useState([]);
   const [page, setPage] = useState(0);
-  const [postsPerPage] = useState(10);
+  const [postsPerPage] = useState(60);
   const [searchValue, setSearchValue] = useState('');
 
   const noMorePosts = page + postsPerPage >= allPosts.length;
@@ -48,25 +48,15 @@ export const Home = () => {
   };
 
   return (
-    <section className='container'>
-      <div className='search-container'>
+    <section className="container">
+      <div className="search-container">
         <TextInput searchValue={searchValue} handleChange={handleChange} />
         {!!searchValue && <p>Search value: {searchValue}</p>}
       </div>
-      {filteredPosts.length > 0 ? (
-        <Posts posts={filteredPosts} />
-      ) : (
-        <p>Não existem posts</p>
-      )}
+      {filteredPosts.length > 0 ? <Posts posts={filteredPosts} /> : <p>Não existem posts</p>}
 
-      <div className='button-container'>
-        {!searchValue && (
-          <Button
-            text='Load More Posts'
-            onClick={loadMorePosts}
-            disabled={noMorePosts}
-          ></Button>
-        )}
+      <div className="button-container">
+        {!searchValue && <Button text="Load More Posts" onClick={loadMorePosts} disabled={noMorePosts}></Button>}
       </div>
     </section>
   );
